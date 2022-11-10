@@ -38,6 +38,6 @@ resource "scaleway_lb_backend" "nginx_backend" {
   ]
 }
 
-output "service_ip" {
+output "service_address" {
   value = "http://${scaleway_lb.lb.ip_address}"
 }
