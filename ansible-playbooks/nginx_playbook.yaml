@@ -1,0 +1,36 @@
+---
+# Simple Playbook that install nginx on ubuntu distriubution
+-
+
+  # Hosts: where our play will run and options it will run with
+  hosts: linux
+  tasks:
+    - name: Install EPEL
+      yum:
+        name: epel-release
+        update_cache: yes
+        state: latest
+      when: ansible_distribution == 'CentOS'
+
+    - name: Install Nginx
+      package:
+        name: nginx
+        state: latest
+        update_cache: yes
+    
+    - name: Upgrade Nginx Html File
+      copy:
+        content: '<p>Welcome Nginx on host <b>{{ansible_hostname}}</b> with distribution <b>{{ansible_distribution}}</b></p>'
+        dest: "{{'/var/www/html/index.html' if ansible_distribution == 'Ubuntu' else '/usr/share/nginx/html/index.html'}}" 
+        
+
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted
+      notify: Check HTTP Service
+  handlers:
+    - name: Check HTTP Service
+      uri:
+        url: http://{{ ansible_default_ipv4.address }}
+        status_code: 200 

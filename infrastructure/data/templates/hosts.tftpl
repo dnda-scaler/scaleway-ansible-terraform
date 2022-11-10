@@ -1,0 +1,11 @@
+[ubuntu]
+%{ for ubuntu_server in ubuntu_servers ~}
+${ubuntu_server.name}
+%{ endfor ~}
+[centos]
+%{ for centos_server in centos_hosts ~}
+${centos_server.name}
+%{ endfor ~}
+[linux:children]
+centos
+ubuntu

@@ -1,0 +1,10 @@
+ansible_controller_node_type = "DEV1-S"
+ubuntu_host_count=1
+ubuntu_hosts_node_type = "DEV1-S"
+centos_host_count=1
+centos_hosts_node_type = "DEV1-S"
+zone="fr-par-1"
+private_network_cidr="192.168.0.0/24"
+dhcp_pool_high="192.168.0.250"
+load_balancer_static_ip=["192.168.0.251","192.168.0.252"]
+scw_secret_key= #should be put as environment variable using TF_VAR_scw_secret_key
