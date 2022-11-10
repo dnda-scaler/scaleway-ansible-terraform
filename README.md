@@ -14,17 +14,28 @@ Terraform will be used from an admin local computer to deploy the whole architec
 - Load Balancer
 - Ubuntu Controller(i.e : Ansible Pre Installed through Cloud Init)
 - Ubuntu & Centos Web Server Hosts
-- SSH Keys Generation (i.e. those keys are added as project keys so that they can be use to access any server and are also put as ssh key on the controller so that he can access to every server)
+- SSH Keys Generation (i.e. those keys are added as project keys so that they can be use to access any server and are also put as ssh key on the controller so that it can access to every server)
+- Nginx Playbook sources Copy in the controller
 - Ansible Configuration Generation in Ansible Controller
     - Static Inventory
     - Default Configuration
 The inventory will be on the following form :
-//TODO Image of the inventory
+```
+[ubuntu]
+ubuntu-server-0
+ubuntu-server-1
+[centos]
+centos-server-0
+centos-server-1
+[linux:children]
+centos
+ubuntu
+```
 
-Hosts are gathered under the linux category which have 2 sub category centos and ubuntu that allow us to customize our ansible configuration depending on the nature of the host.
-- Nginx Playbook sources Copy in the controller
+Hosts are gathered under the linux category which have 2 sub categories centos and ubuntu. This allow us to customize our ansible configuration depending on the nature of the host.
+
 ## Configuration Management
-Ansible will be in charge of deploying Nginx web server on the targeted web server. Ansible will be deployed on the controller.
+Ansible will be in charge of deploying Nginx web server on the targeted web server through our controller. 
 It will be accessible using the Public Gateway bastion. 
 
 ```ssh -J bastion@$bastion_ip:61000 $user@ansible-controller.ansible-pn```
