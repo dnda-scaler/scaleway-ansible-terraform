@@ -31,6 +31,10 @@ module "ubuntu_hosts" {
   instance_user_data = {
     cloud-init = <<-EOT
     #cloud-config
+    system_info:
+      default_user:
+        name: ansible
+        sudo: ALL=(ALL) NOPASSWD:ALL
     packages_update: true
     packages_upgrade: true
     EOT
@@ -51,6 +55,10 @@ module "centos_hosts" {
   instance_user_data = {
     cloud-init = <<-EOT
     #cloud-config
+    system_info:
+      default_user:
+        name: ansible
+        sudo: ALL=(ALL) NOPASSWD:ALL
     packages_update: true
     packages_upgrade: true
     EOT
