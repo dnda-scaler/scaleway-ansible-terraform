@@ -11,7 +11,7 @@ The architecture can be subdivided in two parts :
 ## Provisioning
 Terraform will be used from an admin local computer to deploy the whole architecture that contains the following :
 - VPC (Private Network & Public Gateway)
-- 
+- Load Balancer
 - Ubuntu Controller(i.e : Ansible Pre Installed through Cloud Init)
 - Ubuntu & Centos Web Server Hosts
 - SSH Keys Generation (i.e. those keys are added as project keys so that they can be use to access any server and are also put as ssh key on the controller so that he can access to every server)
