@@ -2,7 +2,7 @@ variable "ubuntu_host_count" {
   type = number
   validation {
     condition     = var.ubuntu_host_count > 0 && var.ubuntu_host_count <= 5
-    error_message = "Centos hosts must have at least one instance and no more than 5 instances"
+    error_message = "Ubuntu hosts must have at least one instance and no more than 5 instances"
   }
 }
 variable "ubuntu_hosts_node_type" {
