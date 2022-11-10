@@ -4,6 +4,7 @@
 
   # Hosts: where our play will run and options it will run with
   hosts: linux
+  become: true
   tasks:
     - name: Install EPEL
       yum:

@@ -59,7 +59,7 @@ The Nginx Service will be accessible through the Load Balancer that has been con
 
 ## Application Deployment
 The infrastructure deployment step has also added the ansible-playbooks source in this project within the Ansible Controller Server. So that it can be executed once the infrastructure has been delivered. The command to be used has been defined as  output of the terraform script "ansible_playbook_deploy".
-```ansible_playbook_deploy = "ssh -J bastion@bastion_ip:61000 root@ansible-controller.ansible-pn ansible-playbook  /root/ansible-playbooks/nginx_playbook.yaml"```
+```ansible_playbook_deploy = "ssh -J bastion@bastion_ip:61000 ansible@ansible-controller.ansible-pn ansible-playbook  /home/ansible/ansible-playbooks/nginx_playbook.yaml"```
 
 This output value should be copied and executed within a command for nginx deployment to happen.
 
@@ -70,5 +70,4 @@ The Nginx Application deployed will be accessible from the Load Balancer Public 
 This example can also be used as Sandbox for Ansible deployment by using your own playbooks or Role from Galaxy. 
 # Warning 
 - Ansible inventory is static and generated just once (So if you add a server you should update it manually)
-- root user is static (To be fix)
 - Playbook source is copy once and not synchronized
