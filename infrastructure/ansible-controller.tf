@@ -1,12 +1,12 @@
 locals {
-  data_path="${path.module}/data"
-  controller_instance_name="ansible-controller"
+  data_path                = "${path.module}/data"
+  controller_instance_name = "ansible-controller"
 }
 variable "ansible_controller_node_type" {
-  type=string
+  type = string
 }
 data "local_file" "ansible_config" {
-    filename = "${local.data_path}/files/ansible.cfg"
+  filename = "${local.data_path}/files/ansible.cfg"
 }
 
 data "local_file" "nginx_playbook" {
@@ -16,7 +16,7 @@ data "local_file" "nginx_playbook" {
 
 resource "scaleway_instance_server" "ansible-controller" {
   name  = local.controller_instance_name
-  type  =  var.ansible_controller_node_type
+  type  = var.ansible_controller_node_type
   image = "ubuntu_jammy"
   // It does not seem to be possible to have both Flexible IP and Dynamic IP
   private_network {
@@ -51,13 +51,13 @@ resource "scaleway_instance_server" "ansible-controller" {
 }
 
 locals {
-  ansible_hosts=templatefile("${local.data_path}/templates/hosts.tftpl",{ubuntu_servers=module.ubuntu_hosts,centos_hosts=module.centos_hosts})
-  controller_ssh_command_base="ssh -J bastion@${local.bastion_address} root@${local.controller_instance_name}.${local.pn_name}"
+  ansible_hosts               = templatefile("${local.data_path}/templates/hosts.tftpl", { ubuntu_servers = module.ubuntu_hosts, centos_hosts = module.centos_hosts })
+  controller_ssh_command_base = "ssh -J bastion@${local.bastion_address} root@${local.controller_instance_name}.${local.pn_name}"
 }
 
 output "controller_ssh_command_base" {
   value = local.controller_ssh_command_base
 }
 output "ansible_playbook_deploy" {
-  value="${local.controller_ssh_command_base} ansible-playbook  /root/ansible-playbooks/nginx_playbook.yaml"
+  value = "${local.controller_ssh_command_base} ansible-playbook  /root/ansible-playbooks/nginx_playbook.yaml"
 }
