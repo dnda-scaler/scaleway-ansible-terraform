@@ -3,5 +3,6 @@ variable "zone" {
 }
 // Is required to call scaleway API for retrieving DHCP information
 variable "scw_secret_key" {
-  type = string
+  type      = string
+  sensitive = true
 }
