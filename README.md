@@ -54,47 +54,10 @@ This output value should be copied and executed within a command for nginx deplo
 
 ![Ansible App Deployment](./docs/resources/images/ansible_app_deployment.png)
 
-The Nginx Application deployed will be accessible from the Load Balancer Public IP. It can be retrieved from the terrafomr output **service_address**
-
-Application has been provisionned so command can be launched
-1. kubectl apply -f k8s
-Terraform will be used to deploy the whol
-
-//TODO IP of the Load Balancer with terraform
-
-Project that combines ansible and terraform to deliver infrastructure and configuration on scaleway infrastructure. VPC Context
-# Infrastructure
-Terraform will be used to provide underlying infrastructure which will perform the following :
-- Ubuntu Controller  with ansible installed (through Cloud init)
-- Scaleway Credentials update within 
-- 2*Ubuntu Server 
-- 1* Centos Server
-- SSH Key Generation
-- Ansible Configuration Generation (including static hosts group)
-    following model
-    [ubuntu]
-ansible-ubuntu-0
-ansible-u
-[centos]
-[linux:children]
-centos
-ubuntu
-tf_var_secret_key
-# Ansible
-Ansible will be here used for applications deployment on our instance
-keys
-# Deployment
-# TODO Add schema
-## Prerequisites
-- Terraform
-## Infrastructure
-1. Rename terraform.tfvars.template -> terraform.tfvars
-2. Rename provider.tf.template -> provider.tf
-3. Provide provider info
-4. Fill the terraform.tfvars
-5. terraform init 
-6. terraform apply
-# Disclaimer 
-Static Hosts
-root user
-Playbook source is copy once
+The Nginx Application deployed will be accessible from the Load Balancer Public IP. It can be retrieved from the terraform output **service_address**
+# Notes
+This example can also be used as Sandbox for Ansible deployment by using your own playbooks or Role from Galaxy. 
+# Warning 
+- Ansible inventory is static and generated just once (So if you add a server you should update it manually)
+- root user is static (To be fix)
+- Playbook source is copy once and not synchronized
